@@ -1,24 +1,2 @@
-# Idea Origin
-
-The idea for this platform came from a common problem on hostel campuses: students often avoid reporting infrastructure and safety issues because the complaint process feels uncomfortable, informal, and ineffective.
-
-Students face problems such as:
-- damaged taps and leaking pipes
-- unclean corridors and washrooms
-- broken electrical sockets
-- poor ventilation and lighting
-- maintenance delays
-- misconduct or harassment concerns
-- lack of trust in management follow-up
-
-Many students hesitate to speak up because they fear being ignored, judged, or reported to authorities. In many cases, complaints are shared verbally with a warden or staff member, but there is no protected digital trail, no visibility on status, and no accountability for resolution.
-
-This product aims to solve that gap by giving students a private, structured, and transparent way to report issues with proof and follow-up tracking.
-
-## Core Goal
-
-Create a digital complaint recording system for hostel residents that helps students document problems, attach visual evidence, and track whether their issues are acknowledged and resolved.
-
-## Why this matters
-
-A hostel should be a safe, clean, and well-maintained living environment. When issues remain unresolved, students suffer academically, physically, and mentally. This app gives them a secure, easy route to raise problems without embarrassment and with a clear accountability model.
+Shagufta Sumbul :
+                 Students living in hostels and attending college regularly face various issues related to water supply, Wi-Fi connectivity, electricity,                            cleanliness, room maintenance, and other campus facilities. At present, these complaints are often reported through informal methods such as phone                  calls, WhatsApp messages, or verbal communication. Because there is no centralized platform, students have no clear way to track whether their                      complaint has been received, assigned, or resolved. As a result, important complaints may be forgotten, delayed, or repeatedly reported. At the                     same time, hostel and college management may find it difficult to organize, prioritize, assign, and monitor multiple complaints from different                      students. This creates a lack of transparency and makes the overall complaint-resolution process slow and inefficient.
