@@ -5,3 +5,20 @@ Our app provides a centralized platform where students can:
 •	Track complaints 
 
 
+
+
+Mahi Singh:  “HOSTEL / CAMPUS COMPLAINTS”
+College and hostel complaints related to water supply, Wi-Fi, meal quality, toilet maintenance, cleanliness, electricity, and overall hygiene are often ignored or forgotten due to the lack of a proper complaint-management platform. There is often no effective system to track whether a complaint has been addressed or resolved.
+Solution:
+Here comes our app, “PRIX” — a student-oriented platform where students can raise their concerns and get them addressed within a reasonable time.
+Our app provides the following features:
+1st Step: Student Registration
+Students can register using the email address or phone number provided to their college/hostel.
+2nd Step: Student-Oriented Interface
+After successfully logging in, students will be provided with a simple and user-friendly interface designed specifically for their needs.
+3rd SStep: Submit a Complaint
+Students can report problems related to maintenance or other hostel/campus facilities. They can also upload photos and videos as evidence of the issue.
+
+
+
+
