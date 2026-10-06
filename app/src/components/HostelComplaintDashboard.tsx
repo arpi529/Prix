@@ -1,7 +1,7 @@
 "use client";
 
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { isSupabaseConfigured, supabase } from "@/lib/supabase";
+import { appUrl, isSupabaseConfigured, supabase } from "@/lib/supabase";
 
 type Complaint = {
   id: string;
@@ -58,23 +58,6 @@ export default function HostelComplaintDashboard() {
   const [complaints, setComplaints] = useState<Complaint[]>(demoComplaints);
   const [formData, setFormData] = useState(initialForm);
 
-  useEffect(() => {
-    const getSession = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-
-      setUser(session?.user ?? null);
-      setIsAuthLoading(false);
-
-      if (session?.user?.email) {
-        await fetchComplaints(session.user.email);
-      }
-    };
-
-    getSession();
-  }, []);
-
   const fetchComplaints = async (email: string) => {
     if (!isSupabaseConfigured) {
       setComplaints(demoComplaints);
@@ -96,16 +79,45 @@ export default function HostelComplaintDashboard() {
     setComplaints((data as Complaint[]) ?? []);
   };
 
+  useEffect(() => {
+    const getSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      setUser(session?.user ?? null);
+      setIsAuthLoading(false);
+
+      if (session?.user?.email) {
+        await fetchComplaints(session.user.email);
+      }
+    };
+
+    getSession();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null);
+      if (session?.user?.email) {
+        void fetchComplaints(session.user.email);
+      }
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
+
   const handleGoogleLogin = async () => {
     if (!isSupabaseConfigured) {
-      setStatusMessage("Add your Supabase credentials to enable Google sign-in.");
+      setStatusMessage("Connect Supabase and add your Google OAuth app credentials before login will work.");
       return;
     }
 
+    const redirectUrl = `${appUrl}/auth/callback?next=/dashboard`;
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${window.location.origin}/dashboard`,
+        redirectTo: redirectUrl,
       },
     });
 
@@ -137,6 +149,25 @@ export default function HostelComplaintDashboard() {
     reader.readAsDataURL(file);
   };
 
+  const uploadComplaintImage = async (file: File): Promise<string | null> => {
+    if (!isSupabaseConfigured) {
+      return null;
+    }
+
+    const fileName = `${Date.now()}-${file.name.replace(/\s+/g, "-")}`;
+    const { data, error } = await supabase.storage.from("complaints").upload(fileName, file, {
+      cacheControl: "3600",
+      upsert: false,
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    const { data: publicUrlData } = supabase.storage.from("complaints").getPublicUrl(data?.path ?? fileName);
+    return publicUrlData.publicUrl ?? null;
+  };
+
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
@@ -147,45 +178,62 @@ export default function HostelComplaintDashboard() {
 
     setIsSubmitting(true);
 
-    const payload = {
-      title: formData.title,
-      description: formData.description,
-      category: formData.category,
-      location: formData.location,
-      severity: formData.severity,
-      image_url: formData.image_url,
-      email: user.email,
-      status: "Open",
-      created_at: new Date().toISOString(),
-      user_id: user.id,
-      full_name: user.user_metadata?.full_name ?? user.email,
-    };
+    try {
+      let uploadedImageUrl: string | null = formData.image_url;
 
-    if (!isSupabaseConfigured) {
-      const demoEntry: Complaint = {
-        id: `demo-${Date.now()}`,
-        ...payload,
+      if (formData.image_url && formData.image_url.startsWith("data:image")) {
+        const fileInput = document.getElementById("image") as HTMLInputElement | null;
+        const file = fileInput?.files?.[0];
+
+        if (file) {
+          uploadedImageUrl = await uploadComplaintImage(file);
+        }
+      }
+
+      const payload = {
+        title: formData.title,
+        description: formData.description,
+        category: formData.category,
+        location: formData.location,
+        severity: formData.severity,
+        image_url: uploadedImageUrl ?? "",
+        email: user.email,
+        status: "Open",
+        created_at: new Date().toISOString(),
+        user_id: user.id,
+        full_name: user.user_metadata?.full_name ?? user.email,
       };
-      setComplaints((current) => [demoEntry, ...current]);
+
+      if (!isSupabaseConfigured) {
+        const demoEntry: Complaint = {
+          id: `demo-${Date.now()}`,
+          ...payload,
+          image_url: uploadedImageUrl ?? undefined,
+        };
+        setComplaints((current) => [demoEntry, ...current]);
+        setFormData(initialForm);
+        setStatusMessage("Demo complaint saved locally. Connect Supabase and create the complaints bucket/table to enable live persistence.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      const { data, error } = await supabase.from("complaints").insert([payload]).select();
+
+      if (error) {
+        setStatusMessage(error.message);
+        setIsSubmitting(false);
+        return;
+      }
+
+      const savedComplaint = (data?.[0] as Complaint) ?? payload;
+      setComplaints((current) => [savedComplaint, ...current]);
       setFormData(initialForm);
-      setStatusMessage("Demo complaint saved locally. Connect Supabase to store it in the database.");
+      setStatusMessage("Complaint submitted successfully. Administration will review it soon.");
       setIsSubmitting(false);
-      return;
-    }
-
-    const { data, error } = await supabase.from("complaints").insert([payload]).select();
-
-    if (error) {
-      setStatusMessage(error.message);
+    } catch (error: any) {
+      setStatusMessage(error.message || "There was a problem uploading your complaint.");
       setIsSubmitting(false);
-      return;
     }
-
-    const savedComplaint = (data?.[0] as Complaint) ?? payload;
-    setComplaints((current) => [savedComplaint, ...current]);
-    setFormData(initialForm);
-    setStatusMessage("Complaint submitted successfully. Administration will review it soon.");
-    setIsSubmitting(false);
   };
 
   const stats = {
