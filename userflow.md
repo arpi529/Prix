@@ -1,31 +1,35 @@
-# User Flow
+Shagufta Sumbul: How the App Works
+Student Register
+        ↓
+Student login 
+        ↓
+Submit Complaint(upload image & text)
+        ↓
+Status Updated
+        ↓
+Student Receives Notification
 
-## 1. Landing Page
-The user lands on the homepage, which explains the purpose of the platform and presents a call to action such as "Continue with Google".
 
-## 2. Registration / Login
-The student signs up using their Google account. This creates a secure identity tied to their account and reduces friction for first-time users.
+1.Student Registration
+A new student creates an account using basic details such as name and  email id .
+These details are stored securely and used to identify the student when a complaint is submitted.
 
-## 3. Dashboard Access
-Once authenticated, the student is redirected to the dashboard where they can see complaint actions and previous reports.
+2. Student Login
+The registered student logs into the app.
+After login, the student can access the complaint dashboard, previous complaints, their current status, and notifications.
 
-## 4. Complaint Submission
-The student fills out a complaint form with:
-- title
-- category
-- hostel/location
-- description
-- severity
-- image attachment
+3. Submit Complaint
+The student enter a short description of the problem.
+They can also upload an image/video as proof and provide the exact location, such as hostel/block/room.
+  
 
-## 5. Data Storage
-The complaint is saved to Supabase, including text details and image data or image URL.
+4. Complaint Assigned & Status Updated
+The complaint appears on the admin/management dashboard.
+Management checks the complaint and forwards it to the concerned department or staff member.
+The status changes from unresolved to resolved.
+The responsible staff member can update the progress through the app.
 
-## 6. Tracking and Follow-up
-The student can revisit their dashboard to check status, find relevant updates, and review the complaint history.
+5. Student Receives Notification
+Whenever there is a status change, the student receives a notification.
 
-## 7. Admin Action
-An administrator or manager can review complaints, assign tasks, and update the resolution status.
-
-## 8. Resolution
-Once a complaint is fixed, the issue status is updated so the student can see that action has been taken.
+ 
