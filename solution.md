@@ -1,33 +1,9 @@
-# Solution
+Shagufta Sumbul:In a college or hostel environment, students often face everyday problems related to water supply, Wi-Fi, electricity, cleanliness, maintenance, and other facilities. However, reporting these issues and getting them resolved can be difficult when there is no proper system to manage complaints. Our proposed Hostel/Campus Complaint Management App aims to provide a simple and centralized platform where students can report issues, track their complaint status, and receive updates until the problem is resolved. At the same time, the management can efficiently receive, prioritize, assign, and monitor complaints, making the entire process faster, more transparent, and organized. 
+Our app provides a centralized platform where students can:
+•	Register complaints with category and description.
+•	Upload photos/videos as proof of the issue.
+•	Mention the hostel/block/room/location.
+•	Receive status updates and notifications.
+•	Track complaints as Pending → In Progress → Resolved.
+•	Give feedback after the complaint is resolved.
 
-The solution is a student-friendly web application that allows hostel residents to report maintenance and safety issues in a structured, quick, and anonymous-friendly manner.
-
-## Key Features
-
-- Google-based registration and login
-- Student dashboard for submitting complaints
-- Text-based issue reporting
-- Image upload or photo evidence attachment
-- Category-based complaint types
-- Hostel/location tagging
-- Complaint status tracking
-- Complaint history and resolution updates
-- Supabase-powered data storage
-
-## Why this works
-
-The platform reduces friction in complaint reporting by moving it from informal conversations to a trusted digital channel. Students can upload evidence, describe the issue clearly, and keep a record that management can access and act upon.
-
-This makes it easier for institutions to monitor recurring problems, assign resolution duties, and maintain accountability for repairs and facility issues.
-
-## Technical Approach
-
-- Frontend: Next.js app
-- Database: Supabase PostgreSQL
-- Authentication: Google OAuth via Supabase Auth
-- Storage: complaint images stored as text URLs or Supabase Storage-ready files
-- Reporting process: complaint form -> validation -> save in database -> dashboard tracking
-
-## Expected Outcome
-
-The app creates a more transparent complaint mechanism, reduces delays, and helps college or school administrators manage hostel infrastructure and student concerns more effectively.
