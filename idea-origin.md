@@ -3,8 +3,16 @@ Shagufta Sumbul :
 
 
 
-Mahi Singh: Many people face a number of problems while shifting from their homes to college hostels. Even after successfully moving into the hostel, their problems do not end. Numerous students struggle with everyday issues related to hostel maintenance and basic facilities.
+Mahi Singh
+Many people face a number of problems while shifting from their homes to college hostels. Even after successfully moving into the hostel, their problems do not end. Numerous students struggle with everyday issues related to hostel maintenance and basic facilities.
 A person who is already adjusting to a new city and a new environment is often not comfortable in the hostel, which is supposed to be their “second home.” They may face judgment or bullying from roommates and often have no one to approach or complain to.
 Meals are another major concern. Someone who is already missing home-cooked food may not feel comfortable with the food served at the hostel. Hygiene issues are also common, including problems with laundry timings, Wi-Fi connectivity, toilet maintenance, cleanliness, and other basic facilities.
 Being homesick while simultaneously trying to adjust to a new environment and dealing with similar problems every day can leave students feeling frustrated and dissatisfied with their hostel experience.
 Students lack a “one-stop platform” where they can report their problems without hesitation and ensure that those complaints are properly tracked and resolved within a reasonable time.
+
+
+
+
+SAURABH KUMAR I live in a hostel and often face problems like poor Wi-Fi, water shortages, and electricity issues,         damaged flush in bathroom food hygiene issue, laundry issues, damaged socket. After reporting these problems, I don't know whether my complaint has been received or is being solved. I often need to remind the staff again and again. This inspired me to build a Hostel/Campus Complaint Tracking System that keeps track of every complaint until it is resolved
+
+              
